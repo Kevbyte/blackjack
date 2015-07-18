@@ -1,31 +1,26 @@
 #
 class window.AppView extends Backbone.View
   template: _.template '
-    <button class="hit-button">Hit</button> <button class="stand-button">Stand</button>
+    <button class="hit-button">Hit</button> <button class="stand-button">Stand</button> <button class="re-deal-button">Re-Deal</button>
     <div class="player-hand-container"></div>
     <div class="dealer-hand-container"></div>
   '
 
   events:
-    'click .hit-button': -> @model.get('playerHand').hit()
-    'click .stand-button': -> @model.get('dealerHand').stand()
-    # 'click .stand-button': -> @model.get('dealerHand').
+    'click .hit-button': -> 
+      @model.get('playerHand').hit()
+      @model.newGame()
+    'click .stand-button': -> 
+      @model.get('dealerHand').stand()
+    'click .re-deal-button': ->
+      @model.reDeal()
 
   initialize: ->
     @render()
-        if $('.score:first').text() > 21
-      alert "Dealer Wins"
+    @model.on 'change:busted', =>
+      console.log "should refresh the game"
+      @render()
 
-    if $('.score:last').text() > 21
-      alert "Player Wins"
-
-    if $('.score:last').text() < 22 and $('.score:last').text() > 16
-      if $('.score:last').text() is $('.score:first').text()
-        alert "Tie" 
-      else if $('.score:first').text() > $('.score:last').text()
-        alert "Player Wins"
-      else if $('.score:last').text() > $('.score:first').text()
-        alert "Dealer Wins"
 
   render: ->
     @$el.children().detach()
