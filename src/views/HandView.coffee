@@ -11,8 +11,9 @@ class window.HandView extends Backbone.View
   render: ->
     @$el.children().detach()
     @$el.html @template @collection
+    # @$el.children().css 'background-image': "url(img/cards/#{@model.attributes.rankName}-#{@model.attributes.suitName}.png)"
     @$el.append @collection.map (card) ->
-      new CardView(model: card).$el
+      new CardView(model: card).$el.css 'background-image': "url(img/cards/#{card.attributes.rankName}-#{card.attributes.suitName}.png)"
     
     if @collection.scores()[1]>21
       @$('.score').text @collection.scores()[0]
@@ -20,25 +21,16 @@ class window.HandView extends Backbone.View
       @$('.score').text @collection.scores()[1]
 
     if $('.score:first').text() > 21
-      alert "Dealer Wins"
-      console.log $('.score:first').text()
-      console.log $('.score:last').text()
+      console.log "Dealer Wins"
 
     if $('.score:last').text() > 21
-      alert "Player Wins"
-      console.log $('.score:first').text()
-      console.log $('.score:last').text()
+      console.log "Player Wins"
 
     if $('.score:last').text() < 22 and $('.score:last').text() > 16
       if $('.score:last').text() is $('.score:first').text()
-        alert "Tie" 
+        console.log "Tie" 
       else if $('.score:first').text() > $('.score:last').text()
-        alert "Player Wins"
-        console.log $('.score:first').text()
-        console.log $('.score:last').text()
+        console.log "Player Wins"
       else if $('.score:last').text() > $('.score:first').text()
-        alert "Dealer Wins"
-        console.log $('.score:first').text()
-        console.log $('.score:last').text()
-  
+        console.log "Dealer Wins"
     

@@ -1,16 +1,25 @@
+html {
+  background-image: url('http://i.stack.imgur.com/q02th.jpg');
+}
+
+h2 {
+  color: white;
+}
+
 .card {
   float: left;
   border: solid 1px black;
-  width: 100px;
+  width: 120px;
   border-radius: 5px;
-  height: 140px;
+  height: 166px;
   margin-right: 20px;
 }
 
 .covered {
-  background-color: black;
+  background-image: url('../img/card-back.png') !important;
 }
 
 .hand {
   overflow: auto;
 }
+
