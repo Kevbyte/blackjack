@@ -1,3 +1,4 @@
+#
 class window.AppView extends Backbone.View
   template: _.template '
     <button class="hit-button">Hit</button> <button class="stand-button">Stand</button>
@@ -7,7 +8,8 @@ class window.AppView extends Backbone.View
 
   events:
     'click .hit-button': -> @model.get('playerHand').hit()
-    'click .stand-button': -> @model.get('playerHand').stand()
+    'click .stand-button': -> @model.get('dealerHand').stand()
+    # 'click .stand-button': -> @model.get('dealerHand').
 
   initialize: ->
     @render()

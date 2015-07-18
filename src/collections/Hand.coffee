@@ -3,8 +3,16 @@ class window.Hand extends Backbone.Collection
 
   initialize: (array, @deck, @isDealer) ->
 
+
   hit: ->
     @add(@deck.pop())
+
+  stand: ->
+    @at(0).flip()
+
+    while $('.score:last').text() < 17
+      @add(@deck.pop())
+    
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
